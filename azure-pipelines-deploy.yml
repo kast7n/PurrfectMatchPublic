@@ -1,0 +1,90 @@
+trigger:
+- main
+
+variables:
+  # Agent VM image name
+  vmImageName: 'windows-latest'
+
+  # Backend variables
+  solution: '**/*.sln'
+  buildPlatform: 'Any CPU'
+  buildConfiguration: 'Release'
+  apiProjectPath: 'PurrfectMatch.Api/PurrfectMatch.Api.csproj'
+  
+  # Frontend variables
+  frontendFolderPath: 'PurrfectMatch.Web'
+
+stages:
+- stage: BuildAndDeployAPI
+  displayName: 'Build and Deploy API'
+  jobs:
+  - job: Build
+    displayName: 'Build .NET API'
+    pool:
+      vmImage: $(vmImageName)
+    steps:
+    - task: DotNetCoreCLI@2
+      displayName: 'Restore NuGet packages'
+      inputs:
+        command: 'restore'
+        projects: $(solution)
+        feedsToUse: 'select'
+
+    - task: DotNetCoreCLI@2
+      displayName: 'Build solution'
+      inputs:
+        command: 'build'
+        projects: $(solution)
+        arguments: '--configuration $(buildConfiguration)'
+
+    - task: DotNetCoreCLI@2
+      displayName: 'Publish API'
+      inputs:
+        command: 'publish'
+        publishWebProjects: false
+        projects: $(apiProjectPath)
+        arguments: '--configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)'
+        zipAfterPublish: true
+
+    - task: PublishBuildArtifacts@1
+      displayName: 'Publish API Artifact'
+      inputs:
+        PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+        ArtifactName: 'api'
+        publishLocation: 'Container'
+
+  - job: Deploy
+    displayName: 'Deploy API to Azure App Service'
+    dependsOn: Build
+    pool:
+      vmImage: $(vmImageName)
+    steps:
+    - task: DownloadBuildArtifacts@1
+      displayName: 'Download API Artifact'
+      inputs:
+        buildType: 'current'
+        downloadType: 'single'
+        artifactName: 'api'
+        downloadPath: '$(System.ArtifactsDirectory)'    - task: AzureWebApp@1
+      displayName: 'Deploy to Azure App Service'
+      inputs:
+        azureSubscription: 'Your Azure Subscription'
+        appName: 'YourAppServiceName'
+        package: '$(System.ArtifactsDirectory)/**/*.zip'
+
+- stage: BuildAndDeployFrontend
+  displayName: 'Build and Deploy Frontend'
+  jobs:
+  - job: Deploy
+    displayName: 'Build and Deploy to Azure Static Web Apps'
+    pool:
+      vmImage: 'ubuntu-latest' # Static Web Apps task runs best on Linux    variables:
+    - group: YourVariableGroup # Replace with your variable group name
+    steps:
+    - task: AzureStaticWebApp@0
+      displayName: 'Deploy to Azure Static Web Apps'
+      inputs:
+        app_location: $(frontendFolderPath)
+        api_location: '' # API is deployed separately
+        output_location: 'dist' # Vite's default build output folder
+        azure_static_web_apps_api_token: $(deployment_token)

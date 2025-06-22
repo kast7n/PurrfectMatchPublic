@@ -1,0 +1,6 @@
+@PurrfectMatch.Api_HostAddress = http://localhost:5030
+
+GET {{PurrfectMatch.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

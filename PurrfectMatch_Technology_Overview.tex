@@ -1,0 +1,134 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{tcolorbox}
+\usepackage{enumitem}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{hyperref}
+
+% Page geometry
+\geometry{margin=1in}
+
+% Colors
+\definecolor{primaryblue}{RGB}{0,123,255}
+\definecolor{secondarygreen}{RGB}{40,167,69}
+\definecolor{lightgray}{RGB}{248,249,250}
+\definecolor{darkgray}{RGB}{52,58,64}
+
+% Hyperref setup
+\hypersetup{
+    colorlinks=true,
+    linkcolor=primaryblue,
+    urlcolor=primaryblue,
+}
+
+% Custom title formatting
+\titleformat{\section}
+{\Large\bfseries\color{primaryblue}}
+{\thesection}{1em}{}
+
+\titleformat{\subsection}
+{\large\bfseries\color{secondarygreen}}
+{\thesubsection}{1em}{}
+
+\pagestyle{empty} % No page numbers or headers
+
+\begin{document}
+
+% Title page
+\begin{titlepage}
+    \centering
+    \vspace*{4cm}
+    
+    {\Huge\bfseries\color{primaryblue} PurrfectMatch}\\[0.5cm]
+    {\Large\color{secondarygreen} Technology Stack Overview}\\[3cm]
+    
+    \begin{tcolorbox}[colback=lightgray, colframe=primaryblue, width=0.9\textwidth]
+        \centering
+        \textbf{A summary of the core technologies, frameworks, and libraries used in the PurrfectMatch pet adoption platform.}
+    \end{tcolorbox}
+    
+    \vfill
+    
+    {\Large \today}
+\end{titlepage}
+
+\newpage
+
+\section*{Technology Stack}
+
+PurrfectMatch is a full-stack application built on a modern, robust, and scalable technology stack. The architecture is designed to be maintainable and testable, following Clean Architecture principles.
+
+\subsection*{Backend Technologies}
+
+The backend is built on the .NET ecosystem, providing a high-performance and secure foundation for the API and business logic.
+
+\begin{tcolorbox}[colback=lightgray, colframe=secondarygreen, title=Core Backend Stack]
+    \begin{itemize}[leftmargin=*]
+        \item \textbf{.NET 8}: The core framework for building the application.
+        \item \textbf{ASP.NET Core 8}: Used for building the RESTful Web API.
+        \item \textbf{Entity Framework Core 8}: The object-relational mapper (ORM) for data access.
+        \item \textbf{Microsoft SQL Server}: The primary relational database.
+        \item \textbf{ASP.NET Core Identity}: For handling user authentication and authorization.
+    \end{itemize}
+\end{tcolorbox}
+
+\subsection*{Frontend Technologies}
+
+The frontend is a modern single-page application (SPA) built with React and TypeScript, ensuring a type-safe and component-based UI.
+
+\begin{tcolorbox}[colback=lightgray, colframe=secondarygreen, title=Core Frontend Stack]
+    \begin{itemize}[leftmargin=*]
+        \item \textbf{React 19}: The JavaScript library for building the user interface.
+        \item \textbf{TypeScript 5.7}: Provides static typing for JavaScript.
+        \item \textbf{Vite}: The build tool and development server for the frontend.
+        \item \textbf{Material-UI (MUI)}: A comprehensive library of UI components.
+        \item \textbf{Redux Toolkit}: For predictable and centralized state management.
+        \item \textbf{React Router}: For client-side routing and navigation.
+    \end{itemize}
+\end{tcolorbox}
+
+\newpage
+
+\subsection*{Real-time Communication and Payments}
+
+Specialized services are integrated to handle real-time features and secure financial transactions.
+
+\begin{tcolorbox}[colback=lightgray, colframe=primaryblue, title=Key Integrations]
+    \begin{itemize}[leftmargin=*]
+        \item \textbf{ASP.NET Core SignalR}: Enables real-time, bidirectional communication between the server and clients for features like notifications and live updates.
+        \item \textbf{Stripe}: Provides a secure and PCI-compliant platform for processing donations and other payments. The integration uses Stripe.js on the frontend and the Stripe.NET library on the backend.
+    \end{itemize}
+\end{tcolorbox}
+
+\subsection*{Cloud and DevOps}
+
+The application is designed for the cloud, utilizing Azure services for storage and a CI/CD pipeline for automated builds and deployments.
+
+\begin{tcolorbox}[colback=lightgray, colframe=primaryblue, title=Cloud Infrastructure]
+    \begin{itemize}[leftmargin=*]
+        \item \textbf{Azure Blob Storage}: Used for storing user-uploaded content such as pet photos and documents.
+        \item \textbf{Azure DevOps}: Implements the CI/CD pipeline for automating the build, test, and deployment processes.
+    \end{itemize}
+\end{tcolorbox}
+
+\subsection*{Supporting Libraries and Tools}
+
+A selection of powerful libraries are used to support development, testing, and application functionality.
+
+\begin{tcolorbox}[colback=lightgray, colframe=darkgray, title=Development and Tooling]
+    \begin{itemize}[leftmargin=*]
+        \item \textbf{AutoMapper}: For object-to-object mapping between layers.
+        \item \textbf{Serilog}: For structured and flexible logging.
+        \item \textbf{Swashbuckle}: To generate OpenAPI (Swagger) documentation for the API.
+        \item \textbf{xUnit}: The testing framework for .NET.
+        \item \textbf{Moq}: A mocking library for creating test doubles.
+        \item \textbf{ESLint}: For linting TypeScript and JavaScript code.
+    \end{itemize}
+\end{tcolorbox}
+
+\end{document}
