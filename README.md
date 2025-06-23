@@ -1,6 +1,6 @@
 # 🐾 PurrfectMatch - Pet Adoption Platform
 
-<div align="center">
+<div align="center"> 
   <p><strong>Your go-to solution for finding your perfect furry companion!</strong></p>
   <p>A comprehensive platform connecting pet lovers with their ideal companions from shelters and rescues worldwide.</p>
   
@@ -39,6 +39,7 @@
 - [🤝 Contributing](#-contributing)
 - [📄 License](#-license)
 - [📞 Support](#-support)
+
 
 ## 🚀 Overview
 
