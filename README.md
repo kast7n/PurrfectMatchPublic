@@ -11,6 +11,7 @@
   ![Stripe](https://img.shields.io/badge/Stripe-Payments-green)
 </div>
 
+
 > **🔒 Security Notice**: This repository contains placeholder values for sensitive configuration. Before deploying or running the application, you must replace all placeholder values in configuration files with your own secure credentials. See the [Configuration](#-configuration) section for details.
 
 ## 📚 Table of Contents
